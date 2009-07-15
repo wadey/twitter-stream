@@ -40,7 +40,7 @@ public abstract class TwitterStreamHandler implements Runnable {
 		// Should grab the last 10 tweet before joining the live stream, doesn't seem to work though
 		//post.addParameter("count", "10");
 		
-		method.addRequestHeader("Authorization", "Basic " + new String(Base64.encodeBase64(("xxx" + ":" + "xxx").getBytes("UTF-8"))));
+		method.addRequestHeader("Authorization", "Basic " + new String(Base64.encodeBase64((GlobalConfig.get("twitter.username") + ":" + GlobalConfig.get("twitter.password")).getBytes("UTF-8"))));
 
 		System.out.println("executing: " + method.getURI());
 		
