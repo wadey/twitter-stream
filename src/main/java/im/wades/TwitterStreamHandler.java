@@ -13,6 +13,7 @@ import org.apache.commons.httpclient.HttpConnectionManager;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public abstract class TwitterStreamHandler implements Runnable {
@@ -40,7 +41,10 @@ public abstract class TwitterStreamHandler implements Runnable {
 		// Should grab the last 10 tweet before joining the live stream, doesn't seem to work though
 		//post.addParameter("count", "10");
 		
-		method.addRequestHeader("Authorization", "Basic " + new String(Base64.encodeBase64((GlobalConfig.get("twitter.username") + ":" + GlobalConfig.get("twitter.password")).getBytes("UTF-8"))));
+		String twitterUsername = GlobalConfig.getRequired("twitter.username");
+		String twitterPassword = GlobalConfig.getRequired("twitter.password");
+		
+		method.addRequestHeader("Authorization", "Basic " + new String(Base64.encodeBase64((twitterUsername + ":" + twitterPassword).getBytes("UTF-8"))));
 
 		System.out.println("executing: " + method.getURI());
 		

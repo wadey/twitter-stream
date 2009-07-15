@@ -15,7 +15,7 @@ public class TwitterFollowStreamHandler extends TwitterStreamHandler {
 	public static void main(String[] args) {
 		TwitterFollowStreamHandler handler = new TwitterFollowStreamHandler();
 		
-		String followIds = GlobalConfig.get("follow.ids");
+		String followIds = GlobalConfig.getRequired("follow.ids");
 		for (String id : followIds.split(",")) {
 			if (handler.getFollowCount() >= 200) {
 				break;
