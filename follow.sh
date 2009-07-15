@@ -1,2 +1,2 @@
 #!/bin/sh
-mvn exec:java -Dexec.mainClass="im.wades.TwitterFollowStreamHandler"
+mvn compile exec:java -Dexec.mainClass="im.wades.TwitterFollowStreamHandler" "$@"
