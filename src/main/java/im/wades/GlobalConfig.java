@@ -30,8 +30,6 @@ public class GlobalConfig {
 	private GlobalConfig() {}
 	
 	public static String get(String key) {
-		System.out.println("config: " + key);
-		
 		String value = System.getProperty(key);
 		if (value != null) {
 			return value;
