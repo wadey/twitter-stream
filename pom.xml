@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.socialthing</groupId>
+  <groupId>im.wades</groupId>
   <artifactId>twitter-stream</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>twitter-stream</name>
-  <url>http://maven.apache.org</url>
+  <url>http://wades.im/mons</url>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -31,12 +31,12 @@
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-core-lgpl</artifactId>
-      <version>0.9.9-2</version>
+      <version>0.9.9-6</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-lgpl</artifactId>
-      <version>0.9.9-2</version>
+      <version>0.9.9-6</version>
     </dependency>
   </dependencies>
   <build>
