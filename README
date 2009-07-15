@@ -1,0 +1,11 @@
+Simple Twitter Streaming API client (http://apiwiki.twitter.com/Streaming-API-Documentation) implemented in Java. Uses growlnotify to show a Growl popup for new tweets/@replys. Will support following specific users and tracking keywords.
+
+To use, fill in the necessary spots in config.properties (look at the comments in that file). then run:
+
+  ./follow.sh
+
+You can also override config settings from the command line:
+
+  ./follow.sh -Dfollow.ids=7111912,619303,607
+  
+The only requirement is Maven (included with OS X)
