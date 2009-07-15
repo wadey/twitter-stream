@@ -1,4 +1,4 @@
-package com.socialthing;
+package im.wades;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -134,7 +134,7 @@ public class TwitterStream {
 	}
 	
 	public static void growl(String title, String message) throws IOException {
-		String[] cmd = new String[]{"/usr/local/bin/growlnotify", "--image", "twitter.png", "-m", message, title};
+		String[] cmd = new String[]{"/usr/local/bin/growlnotify", "-n", "twitter-stream", "--image", "twitter.png", "-m", message, title};
 		Runtime.getRuntime().exec(cmd);
 	}
 }

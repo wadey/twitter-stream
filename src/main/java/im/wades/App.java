@@ -1,4 +1,4 @@
-package com.socialthing;
+package im.wades;
 
 /**
  * Hello world!

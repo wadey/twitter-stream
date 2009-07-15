@@ -1,2 +1,2 @@
 #!/bin/sh
-mvn exec:java -Dexec.mainClass="com.socialthing.TwitterStream"
+mvn exec:java -Dexec.mainClass="im.wades.TwitterStream"
