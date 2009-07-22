@@ -37,7 +37,7 @@ public class TwitterTrackStreamHandler extends TwitterStreamHandler {
 		PostMethod post = new PostMethod("http://stream.twitter.com/track.json");
 		
 		post.addParameter("track", getTrackString());
-		post.addParameter("delimited", "length");
+		// post.addParameter("count", "10");
 		
 		return post;
 	}

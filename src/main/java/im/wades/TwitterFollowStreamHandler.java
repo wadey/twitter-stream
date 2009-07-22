@@ -50,7 +50,6 @@ public class TwitterFollowStreamHandler extends TwitterStreamHandler {
 		PostMethod post = new PostMethod("http://stream.twitter.com/follow.json");
 		
 		post.addParameter("follow", getFollowString());
-		post.addParameter("delimited", "length");
 		
 		return post;
 	}

@@ -1,9 +1,10 @@
 package im.wades;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,16 +21,22 @@ public abstract class TwitterStreamHandler implements Runnable {
 	private HttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
 
 	protected abstract HttpMethod getMethod();
+	private boolean running = true;
 
 	public void run() {
-		// TODO: loop on errors, disconnects
-		
-		try {
-			runStream();
-		} catch (HttpException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		while (running) {
+			try {
+				runStream();
+			} catch (Exception e) {
+				e.printStackTrace();
+				// Back off
+				try {
+					Thread.sleep(5 * 1000L);
+				} catch (InterruptedException e1) {
+					Thread.currentThread().interrupt();
+					break;
+				}
+			}
 		}
 	}
 	
@@ -52,24 +59,30 @@ public abstract class TwitterStreamHandler implements Runnable {
 
 		if (code == 200) {
 			InputStream stream = method.getResponseBodyAsStream();
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(stream));
+			Reader reader = new InputStreamReader(stream, "UTF-8");
+			LineReader lineReader = new LineReader(reader);
 
-			String lengthBytesString;
-			while (true) {
-				do {
-					lengthBytesString = reader.readLine();
-				} while (lengthBytesString.length() < 1);
-				
-				int lengthBytes = Integer.valueOf(lengthBytesString);
-				int off = 0;
-				char[] buffer = new char[lengthBytes];
-				while (off < lengthBytes) {
-					off += reader.read(buffer, off, lengthBytes - off);
+			while (running) {
+				String line;
+				try {
+					line = lineReader.readLine();
+				} catch (SocketException e) {
+					System.out.println("Disconnected... Reconnecting");
+					break;
 				}
-				String line = new String(buffer);
 				
-				parseLine(line);
+				if (line == null) {
+					break;
+				}
+				if (StringUtils.isBlank(line)) {
+					continue;
+				}
+				
+				try {
+					parseLine(line);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			throw new HttpException(method.getStatusLine().toString());
