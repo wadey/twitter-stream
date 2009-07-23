@@ -70,7 +70,7 @@ public class TwitterTrackStreamHandler extends TwitterStreamHandler {
 			String screenName = (String) user.get("screen_name");
 			String tweet = (String) entry.get("text");
 			
-			Utilities.growl(screenName, tweet);
+			Utilities.notify(screenName, tweet);
 			System.out.println("tweet: " + screenName + ": " + tweet);
 		} else {
 			// something else

@@ -83,14 +83,14 @@ public class TwitterFollowStreamHandler extends TwitterStreamHandler {
 			String tweet = (String) entry.get("text");
 			
 			if (followIds.contains(userId)) {
-				Utilities.growl(screenName, tweet);
+				Utilities.notify(screenName, tweet);
 				System.out.println("tweet: " + screenName + ": " + tweet);
 			} else {
 				// This is an @ reply
 				Long inReplyToUserId = ((Number) entry.get("in_reply_to_user_id")).longValue();
 				
 				if (replyIds.contains(inReplyToUserId)) {
-					Utilities.growl(screenName, tweet);
+					Utilities.notify(screenName, tweet);
 					System.out.println("@reply: " + screenName + ": " + tweet);
 				} else {
 					// System.out.println("@reply: " + screenName + ": " + tweet);
