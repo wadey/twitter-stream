@@ -47,7 +47,7 @@ public class TwitterFollowStreamHandler extends TwitterStreamHandler {
 
 	@Override
 	protected HttpMethod getMethod() {
-		PostMethod post = new PostMethod("http://stream.twitter.com/follow.json");
+		PostMethod post = new PostMethod("http://stream.twitter.com/1/statuses/filter.format");
 		
 		post.addParameter("follow", getFollowString());
 		

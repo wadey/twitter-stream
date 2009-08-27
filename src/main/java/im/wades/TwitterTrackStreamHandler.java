@@ -34,7 +34,7 @@ public class TwitterTrackStreamHandler extends TwitterStreamHandler {
 
 	@Override
 	protected HttpMethod getMethod() {
-		PostMethod post = new PostMethod("http://stream.twitter.com/track.json");
+		PostMethod post = new PostMethod("http://stream.twitter.com/1/statuses/filter.format");
 		
 		post.addParameter("track", getTrackString());
 		// post.addParameter("count", "10");
