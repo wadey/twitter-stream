@@ -24,6 +24,7 @@ public abstract class TwitterStreamHandler implements Runnable {
 	private boolean running = true;
 
 	public void run() {
+        try {
 		while (running) {
 			try {
 				runStream();
@@ -38,6 +39,9 @@ public abstract class TwitterStreamHandler implements Runnable {
 				}
 			}
 		}
+        } finally {
+            System.out.println("quiting");
+        }
 	}
 	
 	public void runStream() throws HttpException, IOException {
@@ -58,6 +62,8 @@ public abstract class TwitterStreamHandler implements Runnable {
 		int code = client.executeMethod(method);
 
 		if (code == 200) {
+		  System.out.println("Code 200");
+		  
 			InputStream stream = method.getResponseBodyAsStream();
 			Reader reader = new InputStreamReader(stream, "UTF-8");
 			LineReader lineReader = new LineReader(reader);
@@ -85,6 +91,7 @@ public abstract class TwitterStreamHandler implements Runnable {
 				}
 			}
 		} else {
+		  System.out.println("code: " + code + ": " + method.getStatusLine().toString());
 			throw new HttpException(method.getStatusLine().toString());
 		}
 	}
